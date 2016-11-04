@@ -1,12 +1,11 @@
 library(shiny)
 library(shinydashboard)
-library(sortableR)
 
 header <- dashboardHeader(title = "Analyst Tools")
 
 sidebar <- dashboardSidebar( 
   sidebarSearchForm(textId = "searchText", buttonId = "searchButton", label = "Search..."),
-  sidebarMenu( uiOutput("sideMenu") )
+  sidebarMenu(id="tabs", sidebarMenuOutput("menu"))
 )
 
 body <- dashboardBody( 
@@ -21,8 +20,6 @@ body <- dashboardBody(
     )
   )
   ,uiOutput("sideTabs")
-  # make items draggable to the "Evidence" area
-  ,sortableR( "evidence", options = list( group = "evidenceGroup" ) )
 )
 
 shinyUI(dashboardPage(header, sidebar, body, skin = "blue"))
